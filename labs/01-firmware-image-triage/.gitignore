@@ -1,0 +1,8 @@
+header.bin
+rootfs/
+rootfs.tar.gz
+
+extracted/
+payload.bin*
+submission.json
+report.md

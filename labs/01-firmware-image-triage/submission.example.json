@@ -1,0 +1,17 @@
+{
+  "header": {
+    "magic": "",
+    "size": null
+  },
+  "payload": {
+    "offset": null,
+    "signature": "",
+    "format": ""
+  },
+  "configuration": {
+    "device_id": "",
+    "server": "",
+    "debug_enabled": null,
+    "admin_token": ""
+  }
+}
