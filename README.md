@@ -12,15 +12,19 @@ Sessions are designed to take approximately 30 minutes, assuming familiarity wit
 
 Each session provides an objective, the necessary artifacts, minimal context, setup instructions, and investigation tasks. The analysis is left to the investigator, with solutions kept separate.
 
-The expected outcome is not just an answer, but a reproducible investigation: the commands used, the observations made, and the evidence supporting each conclusion.
+The expected outcome is a reproducible investigation, demonstrated through concrete technical findings and automatically checked submissions where supported.
 
 ## Labs
 
-No labs published yet. Sessions will be added as they are validated and ready to reproduce.
+| Session | Focus | Duration |
+| --- | --- | --- |
+| [01: Firmware Image Triage](labs/01-firmware-image-triage/) | Firmware extraction, startup analysis, security triage | ~30 min |
+
+See each session's README for submission and validation instructions.
 
 ## Repository layout
 
-- `labs/` will contain the sessions and their associated artifacts.
+- `labs/` contains the sessions and their associated artifacts.
 - [`docs/methodology.md`](docs/methodology.md) documents the structure, validation criteria, and scope of the sessions.
 - [`docs/tools.md`](docs/tools.md) provides technical notes and references for tools used in the investigations.
 
