@@ -1,0 +1,32 @@
+name: Validate firmware submissions
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'labs/01-firmware-image-triage/submission.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firmware-validation-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      # Trusted default-branch code only. Never check out or execute PR code.
+      - name: Checkout trusted validator
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Validate submission
+        env:
+          CRYPTO_KEY: ${{ secrets.CRYPTO_KEY }}
+          PR_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: python3 scripts/validate.py check --pr
