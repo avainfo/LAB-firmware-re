@@ -5,13 +5,13 @@
   },
   "payload": {
     "offset": null,
-    "signature": "",
-    "format": ""
+    "format": "",
+    "sha256": ""
   },
-  "configuration": {
-    "device_id": "",
-    "server": "",
-    "debug_enabled": null,
-    "admin_token": ""
+  "startup": {
+    "command": ""
+  },
+  "security": {
+    "weaknesses": ["", ""]
   }
 }
