@@ -1,0 +1,13 @@
+{
+  "lab": "01-firmware-image-triage",
+  "version": 1,
+  "checks": {
+    "header.magic": "5c98b53f190e65b80f67548ca86b55c1ac0ead4715eba74d8551d7c79e4e64ac",
+    "header.size": "6fa3ba3215a16c1126e66efb5d4770aaaad2a2bd6080f07c82c1b5886f42e9e8",
+    "payload.offset": "9f62df807b9f9c096e07e03a5e564cdea68c90d62379578c3a0aa2b8a645735b",
+    "payload.format": "6e915d76904d5ee00780142351722b594a9e8c1f76840d409eba4bef45b33e75",
+    "payload.sha256": "1d89c4879e635a626c64b6fa9e469d06283db30f0ba37916a6719f2e979f3e1e",
+    "startup.command": "6f8b04eaf6b04a466686c5230ba5601bb41ce207007a4bf56c2ec5fd77da3c25",
+    "security.weaknesses": "5c70d2993047b972935dce2d75753c184928b1b2684608b29d6e648186b865f1"
+  }
+}
