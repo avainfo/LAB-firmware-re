@@ -16,11 +16,12 @@ Analyze [`gateway-update.bin`](gateway-update.bin), a synthetic embedded Linux f
 
 ## Submit & check
 
-1. From this directory, run `cp submission.example.json submission.json` and fill in your findings.
-2. Commit `submission.json` to a branch in your fork and open a pull request against this repository's `main` branch.
-3. Open the PR's **Checks** tab and inspect **Validate firmware submissions** for per-field `PASS` / `FAIL` results.
+1. **Fork** this repository and enable **Actions** in your fork (one-time setup).
+2. Copy `submission.example.json` to `submission.json` and fill in your findings.
+3. Commit and push `submission.json` to your fork (the default branch is fine).
+4. Open your fork's **Actions** tab → **Validate firmware submissions** to see per-field `PASS` / `FAIL` results.
 
-Validation accepts equivalent numeric representations and common formatting differences. No validation key is needed to submit a PR.
+No pull request or validation key is required. The validator accepts equivalent numeric representations and common formatting differences.
 
 ## Rules
 
