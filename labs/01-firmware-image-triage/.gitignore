@@ -4,5 +4,5 @@ rootfs.tar.gz
 
 extracted/
 payload.bin*
-submission.json
-report.md
+
+reference.answers.json
