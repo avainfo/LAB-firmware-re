@@ -12,13 +12,9 @@ import os
 import re
 import shlex
 import sys
-import urllib.error
-import urllib.parse
-import urllib.request
 from pathlib import Path
 
 LAB = "01-firmware-image-triage"
-SUBMISSION_PATH = f"labs/{LAB}/submission.json"
 FIELDS = (
     "header.magic",
     "header.size",
@@ -161,41 +157,17 @@ def load_json(raw):
     return value
 
 
-def from_pull_request():
-    repo = os.environ.get("PR_HEAD_REPO", "")
-    commit = os.environ.get("PR_HEAD_SHA", "")
-    if not re.fullmatch(r"[\w.-]+/[\w.-]+", repo) or not re.fullmatch(r"[a-fA-F0-9]{40}", commit):
-        raise SubmissionError("Invalid pull request source")
-    owner, name = repo.split("/")
-    url = (
-        "https://raw.githubusercontent.com/"
-        f"{urllib.parse.quote(owner)}/{urllib.parse.quote(name)}/{commit}/{SUBMISSION_PATH}"
-    )
-    try:
-        request = urllib.request.Request(url, headers={"User-Agent": "firmware-re-validator"})
-        with urllib.request.urlopen(request, timeout=15) as response:
-            return load_json(response.read(MAX_SUBMISSION_BYTES + 1))
-    except urllib.error.URLError as e:
-        raise SubmissionError("Could not read submission.json from PR head") from e
-
-
 def main():
     cli = argparse.ArgumentParser()
     cli.add_argument("mode", choices=("seal", "check"))
-    cli.add_argument("--file", type=Path, help="Local JSON file for sealing or checking")
+    cli.add_argument("--file", type=Path, required=True, help="Submission or reference answers JSON")
     cli.add_argument("--references", type=Path, default=Path(f"labs/{LAB}/reference.hmac.json"))
-    cli.add_argument("--pr", action="store_true", help="Read only the submission JSON from a PR fork")
     args = cli.parse_args()
 
     key = os.environ.get("CRYPTO_KEY", "").encode("utf-8")
     if not key:
         raise SubmissionError("CRYPTO_KEY is not configured")
-    if args.mode == "seal" and (args.file is None or args.pr):
-        cli.error("seal requires --file and does not support --pr")
-    if args.mode == "check" and (args.pr == (args.file is not None)):
-        cli.error("check requires exactly one of --file or --pr")
-
-    data = from_pull_request() if args.pr else load_json(args.file.read_bytes())
+    data = load_json(args.file.read_bytes())
     if args.mode == "seal":
         checks = {field: keyed_digest(key, field, normalize(field, get_field(data, field))) for field in FIELDS}
         document = {"lab": LAB, "version": 1, "checks": checks}
