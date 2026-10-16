@@ -14,6 +14,8 @@ Analyze [`gateway-update.bin`](gateway-update.bin), a synthetic embedded Linux f
 3. **Trace:** Inspect configuration and init scripts. Reconstruct the command the startup script would execute.
 4. **Audit:** Identify two distinct security weaknesses and record short identifiers for each.
 
+**Stuck?** [Open progressive hints](HINTS.md).
+
 ## Submit & check
 
 1. **Fork** this repository and enable **Actions** in your fork (one-time setup).
